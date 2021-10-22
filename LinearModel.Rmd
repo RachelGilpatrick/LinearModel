@@ -63,21 +63,21 @@ The lwr and upr are the 95% confidence intervals for predicted SIMS score when t
 plot(SIMS~GRIP,data=data)
 ```
 
-The greater the pounds of arm force (ARM),the greater the simulation (SIMS)
+The greater the pounds of GRIP force (GRIP),the greater the simulation (SIMS)
 
 ```{r}
 cor(SIMS~GRIP,data=data)
 ```
-This number is the correlation between SIMS and ARM force. Correlation is a measure of the linear association between the two variables.
+This number is the correlation between SIMS and GRIP force. Correlation is a measure of the linear association between the two variables.
 
 ```{r}
-model.1 <- lm(SIMS~ARM,data=data)
+model.1 <- lm(SIMS~GRIP,data=data)
 summary.lm(model.1)
 ```
-The equation is SIMS = -4.095160 + 0.0545563 * ARM
+The equation is SIMS = -4.809675 + 0.045463 * GRIP
 
 ```{r}
-basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
+basicNN <- ggplot(data,aes(y=SIMS,x=GRIP))
 ```
 
 ```{r}
@@ -86,19 +86,27 @@ basicNN + geom_point() + geom_smooth(method=lm)
 
 This scatter plot shows the blue line which is best linear fit to predict what an average SIMS response would be for any ARM strength.
 
-The shaded part is the uncertainnty of the blue line itself.
+The shaded part is the uncertainty of the blue line itself.
 
-shows all of the data points of each individual score and corresponding arm strength. 
+shows all of the data points of each individual score and corresponding GRIP strength. 
 
 ```{r}
 newData=data.frame(GRIP=94,ARM=88)
 predict.lm(model.1,newData,interval="prediction")
 ```
-fit is the predicted ARM score when you have an ARM strength of 88.
+fit is the predicted SIMS score when you have an GRIP strength of 94.
 
-The lwr and upr are the 95% confidence intervals for predicted SIMS score when the ARM is 88.
+The lwr and upr are the 95% confidence intervals for predicted SIMS score when the GRIP score is 94.
 
-## SIMS~ARM+GRIP Regressio
+Comparing the two models, model1 and model2
+
+model1(SIMS~ARM) has a slightly lower Residual standard error score of 1.226 while model2(SIMS~GRIP) scored at 1.295
+
+model1 (SIMS~ARM) has a higher adjusted r squared score of 0.467 while model2(SIMS~GRIP) scored a lower 0.4053
+
+model2 appears to be slightly better model because it has a lower residual standard error score then model1 and also has a higher adjusted R square score than model2 as well.
+
+## SIMS~ARM+GRIP Regression
 
 ## MODEL COMPARISONS
 
