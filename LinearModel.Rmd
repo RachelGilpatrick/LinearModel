@@ -43,13 +43,60 @@ basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
 basicNN + geom_point() + geom_smooth(method=lm)
 ``` 
 
+This scatter plot shows the blue line which is best linear fit to predict what an average SIMS response would be for any ARM strength.
+
+The shaded part is the uncertainnty of the blue line itself.
+
+shows all of the data points of each individual score and corresponding arm strength. 
+
 ```{r}
 newData=data.frame(GRIP=94,ARM=88)
 predict.lm(model.1,newData,interval="prediction")
 ```
+fit is the predicted ARM score when you have an ARM strength of 88.
 
+The lwr and upr are the 95% confidence intervals for predicted SIMS score when the ARM is 88. 
 
 ## SIMS~GRIP Regression
+
+```{r}
+plot(SIMS~GRIP,data=data)
+```
+
+The greater the pounds of arm force (ARM),the greater the simulation (SIMS)
+
+```{r}
+cor(SIMS~GRIP,data=data)
+```
+This number is the correlation between SIMS and ARM force. Correlation is a measure of the linear association between the two variables.
+
+```{r}
+model.1 <- lm(SIMS~ARM,data=data)
+summary.lm(model.1)
+```
+The equation is SIMS = -4.095160 + 0.0545563 * ARM
+
+```{r}
+basicNN <- ggplot(data,aes(y=SIMS,x=ARM))
+```
+
+```{r}
+basicNN + geom_point() + geom_smooth(method=lm)
+``` 
+
+This scatter plot shows the blue line which is best linear fit to predict what an average SIMS response would be for any ARM strength.
+
+The shaded part is the uncertainnty of the blue line itself.
+
+shows all of the data points of each individual score and corresponding arm strength. 
+
+```{r}
+newData=data.frame(GRIP=94,ARM=88)
+predict.lm(model.1,newData,interval="prediction")
+```
+fit is the predicted ARM score when you have an ARM strength of 88.
+
+The lwr and upr are the 95% confidence intervals for predicted SIMS score when the ARM is 88.
 
 ## SIMS~ARM+GRIP Regressio
 
